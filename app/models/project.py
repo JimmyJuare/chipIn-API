@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA
 
-class Project(db.Models):
-    __tablename__ = 'Projects'
+class Project(db.Model):
+    __tablename__ = 'projects'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -13,16 +13,11 @@ class Project(db.Models):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref='projects')
 
-def to_dict(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'project_name': self.project_name,
             'project_type': self.project_type,
             'user_id': self.user_id,
-            'user': {
-                'id': self.user.id,
-                'username': self.user.username,
-                'email': self.user.email,
-                # Include other user attributes as needed
-            }
+            'user': self.user.to_dict() if self.user else None
         }

@@ -23,7 +23,8 @@ def load_user(id):
 
 
 # Tell flask about our seed commands
-app.cli.add_command(seed_commands)
+app.cli.add_command(seed_commands.seed)
+
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
