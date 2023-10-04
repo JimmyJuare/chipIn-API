@@ -5,5 +5,5 @@ from .join_requests import JoinRequest
 from .posts import Post
 from .project_messages import ProjectMessage
 from .project import Project
-from .project_user import UserProject
+from .user_projects import UserProject
 from .db import environment, SCHEMA
