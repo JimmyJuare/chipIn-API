@@ -1,6 +1,5 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-#new_comment
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -10,7 +9,7 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     comment_content = db.Column(db.Text, nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
     created_at = db.Column(db.DateTime)
 
     def to_dict(self):
