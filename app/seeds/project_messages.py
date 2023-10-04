@@ -1,6 +1,6 @@
 from app.models.project_messages import db, ProjectMessage, environment, SCHEMA
 from datetime import datetime
-from app import app  # Make sure to adjust the import based on your project structure
+from app import app 
 from sqlalchemy.sql import text
 
 def seed_project_messages():
