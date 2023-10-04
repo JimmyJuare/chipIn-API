@@ -11,8 +11,8 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     body = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), unique=True)
     status = db.Column(db.String)
     created_at = db.Column(db.DateTime)
 
