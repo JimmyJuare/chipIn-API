@@ -1,5 +1,5 @@
 
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class JoinRequest(db.Model):
@@ -9,9 +9,9 @@ class JoinRequest(db.Model):
         __table_args__ = {'schema': SCHEMA}
                           
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    receiver_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')))
     status = db.Column(db.String)  # 'pending', 'accepted', 'declined'
     created_at = db.Column(db.DateTime, default=datetime.now)
 
