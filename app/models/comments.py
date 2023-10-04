@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA
 
+#new_comment
 
 class Comment(db.Model):
     __tablename__ = 'comments'
