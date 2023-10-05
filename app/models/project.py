@@ -10,6 +10,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(40), nullable=False)
     project_type = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String(255), nullable=True) # , nullable=False
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user = db.relationship('User', backref='projects')
 
@@ -18,6 +19,7 @@ class Project(db.Model):
             'id': self.id,
             'project_name': self.project_name,
             'project_type': self.project_type,
+            'image_url':self.image_url,
             'user_id': self.user_id,
             'user': self.user.to_dict() if self.user else None
         }

@@ -12,6 +12,7 @@ class Post(db.Model):
     title = db.Column(db.String, nullable=False)
     body = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    image_url = db.Column(db.String(255), nullable=True) # , nullable=False
     project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), unique=True)
     status = db.Column(db.String)
     created_at = db.Column(db.DateTime)
@@ -22,6 +23,7 @@ class Post(db.Model):
             'title': self.title,
             'body': self.body,
             'user_id': self.user_id,
+            'image_url':self.image_url,
             'project_id': self.project_id,
             'status': self.status,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
