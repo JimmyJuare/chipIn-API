@@ -23,14 +23,14 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_project_messages()
         undo_join_requests()
-        undo_projects()
         undo_comments()
-        undo_users()
         undo_posts()
+        undo_projects()
+        undo_users()
     seed_users()
     seed_projects()
-    seed_comments()
     seed_posts()
+    seed_comments()
     seed_join_requests()
     seed_project_messages()
 
