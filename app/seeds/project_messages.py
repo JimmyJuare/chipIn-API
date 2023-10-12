@@ -34,7 +34,7 @@ def seed_project_messages():
 
 def undo_project_messages():
     if environment == "production":
-         db.session.execute(f"TRUNCATE table {SCHEMA}.project_messages RESTART IDENTITY CASCADE;")
+         db.session.execute(f"TRUNCATE table {SCHEMA}.project_messages;")
     else:
         db.session.execute(text(f"DELETE FROM project_messages"))
         db.session.commit()
