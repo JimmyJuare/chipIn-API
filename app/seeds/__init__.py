@@ -29,10 +29,10 @@ def seed():
         undo_users()
     seed_users()
     seed_projects()
+    seed_project_messages()
     seed_posts()
     seed_comments()
     seed_join_requests()
-    seed_project_messages()
 
 
 # Creates the `flask seed undo` command
@@ -40,8 +40,8 @@ def seed():
 def undo():
     undo_users()
     undo_projects()
+    undo_project_messages()
+    undo_posts()
     undo_comments()
     undo_join_requests()
-    undo_posts()
-    undo_project_messages()
     # Add other undo functions here

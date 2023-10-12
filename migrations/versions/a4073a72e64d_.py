@@ -94,6 +94,12 @@ def upgrade():
     # ### end Alembic commands ###
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE join_requests SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE project_messages SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE user_projects SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
