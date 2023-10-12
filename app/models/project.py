@@ -8,6 +8,7 @@ class Project(db.Model):
 
 
     id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String, nullable=False)
     project_name = db.Column(db.String(40), nullable=False)
     project_type = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String(255), nullable=True) # , nullable=False

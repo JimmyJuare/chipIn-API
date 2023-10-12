@@ -14,7 +14,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     image_url = db.Column(db.String(255), nullable=True) # , nullable=False
     project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), unique=True)
-    status = db.Column(db.String)
+    status = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime)
 
     def to_dict(self):

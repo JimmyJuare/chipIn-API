@@ -6,11 +6,23 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_projects():
     projects = [
-        Project(project_name='My music Project', project_type='Music', user_id=1),
-        Project(project_name='game dev project', project_type='Software', user_id=2),
-        Project(project_name='film project', project_type='Film', user_id=2),
-        Project(project_name='art project', project_type='Art/Design', user_id=3),
-    ]
+        Project(project_name='My music Project', 
+                project_type='Music',
+                description='new description',
+                user_id=1),
+        Project(project_name='game dev project', 
+                project_type='Software', 
+                description='another description',  # Provide a different description
+                user_id=2),
+        Project(project_name='film project', 
+                project_type='Film', 
+                description='another description',  # Provide a different description
+                user_id=2),
+        Project(project_name='art project', 
+                project_type='Art/Design',
+                description='yet another description',  # Provide a different description
+                user_id=3),
+                ]
     db.session.add_all(projects)
     db.session.commit()
 
