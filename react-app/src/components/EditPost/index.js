@@ -12,16 +12,24 @@ const EditPost = ({ post_id }) => {
   const [body, setBody] = useState("");
   const [status, setStatus] = useState("draft"); // Default status is draft
   const [error, setErrors] = useState("");
-  const  posts = useSelector(state => state.posts.posts)
-  let project_id
-  for(let post of posts){
-    if(post.id === post_id) {
-      console.log('this is the post id', post.id);
-      console.log('this is the post_id', post_id);
-      console.log('this is the post', post);
-      project_id = post.project_id
+  const [oldData, setOldData] = useState({});
+  const post = useSelector(state => state.posts.posts)
+  let project_id = post.project_id
+
+  
+  useEffect(() => {
+    dispatch(postStore.getOnePostThunk(post_id));
+  }, [dispatch, post_id]);
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      console.log('this is the title', title);
+      setBody(post.body);
+      setStatus(post.status || "draft"); // Use post.status or set a default value like "draft"
     }
-  }
+  }, [post]);
+  
+  console.log('this is the post:', post);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {

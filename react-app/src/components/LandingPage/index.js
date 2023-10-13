@@ -11,14 +11,13 @@ import DeletePost from "../DeletePost";
 import ProjectBar from "../ProjectBar";
 function LandingPage() {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts?.posts);
+  const posts = useSelector((state) => state.posts?.posts || []);
   const test = useSelector((state) => state);
   console.log('this is the test', test);
   const user = useSelector(state => state.session.user)
   const res = Array.isArray(posts) ? posts.filter(post => post.status === "Published") : [];
   console.log('this is the session', user);
   const { post_id } = useParams();
-  console.log('this is this post id'. post_id);
   console.log("these are the posts", posts);
   useEffect(() => {
     dispatch(postStore.getPostsThunk());
@@ -42,13 +41,16 @@ function LandingPage() {
               <div className="post">
                 <div className="post-top">
                   <p className="title">{post.title}</p>
-                  {user.id === post.user_id && (
+                  {user && user.id === post.user_id && (
                   <div>
+                    <Link to={`posts/${post.id}`}>
+                    
                     <OpenModalButton
                       className="edit-button"
                       buttonText="Edit Post"
                       modalComponent={<EditPost post_id={post.id}/>}
                     ></OpenModalButton>
+                    </Link>
                     <OpenModalButton
                       className=""
                       buttonText="Delete Post"
