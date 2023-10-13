@@ -23,6 +23,12 @@ const EditPost = ({ post_id }) => {
   }
   useEffect(()=>{
     dispatch(postStore.getOnePostThunk(post_id))
+    
+    if(post){
+      setTitle(post[0].title)
+      setBody(post[0].body)
+      setStatus(post[0].status)
+    }
   },[dispatch])
   console.log('this is the post:', post);
   const handleSubmit = async (e) => {

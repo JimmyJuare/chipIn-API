@@ -60,15 +60,18 @@ export const fetchProject = (projectId) => async (dispatch) => {
 
 export const createProject = (formData) => async (dispatch) => {
   try {
-    const response = await fetch("/api/projects", {
+    console.log('this is the formData',formData);
+    const response = await fetch("/api/projects/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
+    console.log('this is the response', response)
     if (response.ok) {
       const newProject = await response.json();
+      console.log('this is the response JSON', newProject)
       dispatch(addProject(newProject));
     } else {
       console.error("Error creating project:", response.statusText);
