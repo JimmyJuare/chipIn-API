@@ -46,6 +46,7 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`);
     if (response.ok) {
       const post = await response.json();
+      console.log('hitting the thunk', post);
       dispatch(getOnePost(post));
     } else {
       console.error('Error occurred:', response);
