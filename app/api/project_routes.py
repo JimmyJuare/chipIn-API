@@ -37,7 +37,7 @@ def get_project(project_id):
     return jsonify({'error': 'Project not found'}), 404
 
 
-@projects_bp.route('/', methods=['POST'])
+@projects_bp.route('/create', methods=['POST'])
 def create_project():
     form = ProjectForm()
     if form.validate_on_submit:
