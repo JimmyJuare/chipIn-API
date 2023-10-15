@@ -23,6 +23,8 @@ let project_id = null;
 if (foundPost) {
   project_id = foundPost.project_id;
 }
+console.log('this is the project id', project_id);
+console.log('this is the foundPost', foundPost);
 
 
 
@@ -34,9 +36,9 @@ if (foundPost) {
       const currentPost = dispatch(postStore.getOnePostThunk(post_id))
       
       if(currentPost){
-        setTitle(selectedPost[0].title)
-        setBody(selectedPost[0].body)
-        setStatus(selectedPost[0].status)
+        setTitle(foundPost.title)
+        setBody(foundPost.body)
+        setStatus(foundPost.status)
       }
 
   },[dispatch])
