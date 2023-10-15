@@ -13,39 +13,49 @@ const EditPost = ({ post_id }) => {
   const [status, setStatus] = useState("draft"); // Default status is draft
   const [error, setErrors] = useState("");
   const [oldData, setOldData] = useState({});
-  const posts = useSelector(state => state.posts.posts)
-  const post = useSelector(state => state.posts.posts)
-  let project_id = post.project_id
-  for(let post of posts){
-    if(post.id === post_id) {
-      project_id = post.project_id
-    }
-  }
+  const allPosts = useSelector(state => state.posts.posts);
+const selectedPost = useSelector(state => state.posts.currentPost || []);
+
+console.log('this is the selectedPost', selectedPost);
+const foundPost = allPosts.find(post => post.id === post_id);
+let project_id = null;
+
+if (foundPost) {
+  project_id = foundPost.project_id;
+}
+
+
+
+
+
+
   useEffect(()=>{
-    dispatch(postStore.getOnePostThunk(post_id))
-    
-    if(post){
-      setTitle(post[0].title)
-      setBody(post[0].body)
-      setStatus(post[0].status)
-    }
+      
+      const currentPost = dispatch(postStore.getOnePostThunk(post_id))
+      
+      if(currentPost){
+        setTitle(selectedPost[0].title)
+        setBody(selectedPost[0].body)
+        setStatus(selectedPost[0].status)
+      }
+
   },[dispatch])
-  console.log('this is the post:', post);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       title,
       body,
-      status,
+      status:"Published",
       project_id
     };
     try {
-      const editedPost = await dispatch(
+      await dispatch(
         postStore.editPostThunk(post_id, data)
       );
-      if (editedPost) {
-        history.push(`/posts/${post_id}`);
-      }
+        console.log('hitting editpost')
+        history.push(`/`);
+        closeModal();
+
     } catch (resErr) {
       console.error(resErr);
       if (Array.isArray(resErr.errors)) {
@@ -54,8 +64,6 @@ const EditPost = ({ post_id }) => {
         setErrors({ body: "Body is required" });
       }
     }
-    history.push('/')
-    closeModal();
   };
 
   return (
@@ -84,16 +92,6 @@ const EditPost = ({ post_id }) => {
           value={body}
           onChange={(e) => setBody(e.target.value)}
         />
-        <label htmlFor="status">Status</label>
-        <select
-          id="status"
-          name="status"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option value="Draft">Draft</option>
-          <option value="Published">Published</option>
-        </select>
         <button onClick={closeModal}>Cancel</button>
         <button type="submit">Edit Post</button>
       </form>

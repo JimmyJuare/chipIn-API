@@ -12,16 +12,14 @@ export default function ProjectBar() {
   const projects = useSelector((state) => state.projects.projects || []);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  console.log("these are the projects", projects);
   let filteredProjects
   if(user && projects){
     filteredProjects = projects.filter(
       (project) => project.user_id === user.id
     );
   }
-  console.log("these are the current users proejcts", filteredProjects);
   useEffect(() => {
-    dispatch(projectStore.fetchProjects());
+    dispatch(projectStore.fetchUserProjects(user.id));
   }, [dispatch]);
 
   return (

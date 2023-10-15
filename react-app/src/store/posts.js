@@ -46,7 +46,6 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`);
     if (response.ok) {
       const post = await response.json();
-      console.log('hitting the thunk', post);
       dispatch(getOnePost(post));
     } else {
       console.error('Error occurred:', response);
@@ -73,7 +72,7 @@ export const deletePostThunk = (postId) => async (dispatch) => {
 
 export const editPostThunk = (post_id, data) => async (dispatch) => {
   try {
-    console.log('this is the data', data);
+    console.log("Editing post...");
     const response = await fetch(`/api/posts/${post_id}`, {
       method: 'PUT',
       headers: {
@@ -94,6 +93,7 @@ export const editPostThunk = (post_id, data) => async (dispatch) => {
   }
 };
 export const addPostThunk = (postData, newImage) => async (dispatch) => {
+  console.log('this is the post data', postData)
   try {
     let res;
     if (newImage) {
@@ -102,6 +102,7 @@ export const addPostThunk = (postData, newImage) => async (dispatch) => {
       body: postData,
     });
   } else {
+    console.log('hitting the thunk')
     res = await fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -136,7 +137,10 @@ export const getUserPostsThunk = (userId) => async (dispatch) => {
   }
 };
 
-const initialState = { posts: {} };
+const initialState = { 
+  posts: [],
+  currentPost: null,  // Added a new key to store the current post being edited
+};
 
 const postsReducer = (state = initialState, action) => {
   let newState;
@@ -146,11 +150,11 @@ const postsReducer = (state = initialState, action) => {
         ...state,
         posts: action.posts,
       };
-    case GET_ONE_POST:
-      newState = { ...state };
-      newState.posts = [action.post];
-      console.log('this is the single post', newState);
-      return newState;
+      case GET_ONE_POST:
+        return {
+          ...state,
+          currentPost: action.post,  // Set currentPost for the single post
+        };
     case DELETE_POST:
       newState = { ...state };
       newState.posts = newState.posts.filter(

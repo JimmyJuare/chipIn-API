@@ -20,6 +20,7 @@ class Project(db.Model):
             'id': self.id,
             'project_name': self.project_name,
             'project_type': self.project_type,
+            'description': self.description,
             'image_url':self.image_url,
             'user_id': self.user_id,
             'user': self.user.to_dict() if self.user else None

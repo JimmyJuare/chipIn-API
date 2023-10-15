@@ -70,7 +70,7 @@ def create_post():
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict(), 201
-    return jsonify({"error": form.errors}), 400
+    return form.errors, 400
 
 @posts_bp.route('/<int:post_id>', methods=['PUT'])
 @login_required

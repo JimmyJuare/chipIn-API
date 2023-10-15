@@ -19,8 +19,18 @@ function LoginFormPage() {
     if (data) {
       setErrors(data);
     }
+
+  };
+  const demoUser = async() => {
+    const email = 'demo1@aa.io'
+    const  password = 'password'
+        const demoData = await dispatch(login(email, password)
+      );
+
+      
   };
 
+  
   return (
     <>
       <h1>Log In</h1>
@@ -49,6 +59,7 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button type="button" onClick={demoUser}>Demo User</button>
       </form>
     </>
   );

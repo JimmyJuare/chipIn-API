@@ -5,79 +5,89 @@ import { signUp } from "../../store/session";
 import "./SignupForm.css";
 
 function SignupFormModal() {
-	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
-	const { closeModal } = useModal();
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
-		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
-		}
-	};
+  // State variables
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
-	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Username
-					<input
-						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<button type="submit">Sign Up</button>
-			</form>
-		</>
-	);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Form validation checks
+    if (password !== confirmPassword) {
+      setErrors(["Confirm Password must match Password"]);
+    } else if (password.length < 8) {
+      setErrors(["Password must be at least 8 characters"]);
+    } else if (!email.includes("@")) {
+      setErrors(["Email must contain '@' sign"]);
+    } else if (email.length < 5 || username.length < 3) {
+      setErrors(["Email must have a min length of 5 and Username must have a  min length of 3"]);
+    } else if (email.length > 20 || username.length > 20) {
+      setErrors(["Email and Username must be at less than 20 characters"]);
+    } else {
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setErrors(data);
+      } else {
+        closeModal();
+      }
+    }
+  };
+
+  return (
+    <>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Email
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Confirm Password
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </label>
+        <button type="submit">Sign Up</button>
+      </form>
+    </>
+  );
 }
 
 export default SignupFormModal;

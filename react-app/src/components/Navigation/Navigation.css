@@ -1,3 +1,7 @@
+*{
+  margin:0;
+  padding:0
+}
 .profile-dropdown {
   position: absolute;
 }
@@ -7,4 +11,10 @@
 }
 .navbar{
   border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+.logo{
+  height:80px;
+  width:180px;
 }

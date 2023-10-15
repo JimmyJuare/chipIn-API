@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import * as projectStore from "../../store/projects";
 import { useDispatch, useSelector } from "react-redux";
-import OpenModalButton from "../OpenModalButton";
-import EditPost from "../EditPost";
-import { Link } from "react-router-dom/";
-import "./index.css";
+import * as projectStore from "../../store/projects";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function ProjectForm() {
+const ProjectEditForm = ({ projectId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const projects = useSelector((state) => state.projects || []);
+  const project = useSelector((state) => state.projects.currentProject || []);
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
+  const [error, setErrors] = useState("");
   const [description, setDescription] = useState(""); // Default status is draft
-  
+  useEffect(() => {
+    dispatch(projectStore.fetchProject(projectId));
+    if (project) {
+      setName(project.project_name);
+      setType(project.project_type);
+      setDescription(project.description);
+    }
+  }, [dispatch]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -25,13 +30,28 @@ export default function ProjectForm() {
       project_type: type,
       description,
     };
-    await dispatch(projectStore.createProject(data));
-    closeModal()
+    try {
+      const editedPost = await dispatch(
+        projectStore.updateProject(projectId, data)
+      );
+      if (editedPost) {
+        history.push(`/projects/${projectId}`);
+      }
+    } catch (resErr) {
+      console.error(resErr);
+      if (Array.isArray(resErr.errors)) {
+        setErrors({ name: "Name is required" });
+      } else {
+        setErrors({ description: "Description is required" });
+      }
+    }
+    dispatch(projectStore.fetchProject(projectId));
+    closeModal();
   };
   return (
     <>
       <form onSubmit={handleSubmit} className="project-form">
-        <h2>Create Project</h2>
+        <h2>Edit Project</h2>
         <label htmlFor="name">Project Name</label>
         <input
           type="text"
@@ -58,12 +78,12 @@ export default function ProjectForm() {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        >
-         
-        </textarea>
+        ></textarea>
         <button onClick={closeModal}>Cancel</button>
-        <button type="submit">Create Project</button>
+        <button type="submit">Edit Project</button>
       </form>
     </>
   );
-}
+};
+
+export default ProjectEditForm;
