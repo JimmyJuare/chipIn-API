@@ -6,23 +6,25 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_projects():
     projects = [
-        Project(project_name='My music Project', 
-                project_type='Music',
-                description='new description',
-                user_id=1),
-        Project(project_name='game dev project', 
-                project_type='Software', 
-                description='another description',  # Provide a different description
-                user_id=2),
-        Project(project_name='film project', 
-                project_type='Film', 
-                description='another description',  # Provide a different description
-                user_id=2),
-        Project(project_name='art project', 
-                project_type='Art/Design',
-                description='yet another description',  # Provide a different description
-                user_id=3),
-                ]
+        Project(project_name='Music Project 1', project_type='Music', description='Description for Music Project 1', user_id=1),
+        Project(project_name='Music Project 2', project_type='Music', description='Description for Music Project 2', user_id=1),
+        Project(project_name='Music Project 3', project_type='Music', description='Description for Music Project 3', user_id=1),
+        Project(project_name='Software Project 1', project_type='Software', description='Description for Software Project 1', user_id=2),
+        Project(project_name='Software Project 2', project_type='Software', description='Description for Software Project 2', user_id=2),
+        Project(project_name='Software Project 3', project_type='Software', description='Description for Software Project 3', user_id=2),
+        Project(project_name='Art Project 1', project_type='Art/Design', description='Description for Art Project 1', user_id=3),
+        Project(project_name='Art Project 2', project_type='Art/Design', description='Description for Art Project 2', user_id=3),
+        Project(project_name='Art Project 3', project_type='Art/Design', description='Description for Art Project 3', user_id=3),
+        Project(project_name='Music Project 4', project_type='Music', description='Description for Music Project 4', user_id=1),
+        Project(project_name='Software Project 4', project_type='Software', description='Description for Software Project 4', user_id=2),
+        Project(project_name='Art Project 4', project_type='Art/Design', description='Description for Art Project 4', user_id=3),
+        Project(project_name='Music Project 5', project_type='Music', description='Description for Music Project 5', user_id=1),
+        Project(project_name='Software Project 5', project_type='Software', description='Description for Software Project 5', user_id=2),
+        Project(project_name='Art Project 5', project_type='Art/Design', description='Description for Art Project 5', user_id=3),
+        Project(project_name='Music Project 6', project_type='Music', description='Description for Music Project 6', user_id=1),
+        Project(project_name='Software Project 6', project_type='Software', description='Description for Software Project 6', user_id=2),
+        Project(project_name='Art Project 6', project_type='Art/Design', description='Description for Art Project 6', user_id=3),
+    ]
     db.session.add_all(projects)
     db.session.commit()
 
