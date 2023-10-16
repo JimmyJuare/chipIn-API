@@ -22,41 +22,41 @@ export default function ProjectPage() {
   const user = useSelector((state) => state.session.user);
   let projectIsTrue;
   const { project_id } = useParams();
-  const projectId = parseInt(project_id)
+  const projectId = parseInt(project_id);
   let newArr = [];
   //grabs all project ids associated with posts
   for (let post of posts) newArr.push(post.project_id);
 
   //filters out projects by project id not associated with a post
   let newProjects = projects.filter((obj) => !newArr.includes(obj.id));
-  for(let proj of newProjects){
-    if(proj.id === projectId) {
-        projectIsTrue = true
-        break
-    }
-    else projectIsTrue = false
+  for (let proj of newProjects) {
+    if (proj.id === projectId) {
+      projectIsTrue = true;
+      break;
+    } else projectIsTrue = false;
   }
   useEffect(() => {
     dispatch(projectStore.fetchProject(project_id));
     dispatch(projectStore.fetchUserProjects(user.id));
     dispatch(postStore.getUserPostsThunk(user.id));
-
   }, [dispatch]);
   return (
     <div className="project-page-wrapper">
       <ProjectSettingBar />
-      <div>
-        <h2>{project.project_name}</h2>
-        <p>{project.description}</p>
-        {projectIsTrue && (
-          <>
-            <OpenModalButton
-              className="modal-button"
-              buttonText="Create a Post for this project"
-              modalComponent={<CreatePostForm projectId={projectId} />}
-            ></OpenModalButton>
-          </>
-        )}
+      <div className="inner-wrapper">
+        <div className="project-wrapper">
+          <h2>{project.project_name}</h2>
+          <p>{project.description}</p>
+          {projectIsTrue && (
+            <>
+              <OpenModalButton
+                className="modal-button"
+                buttonText="Create a Post for this project"
+                modalComponent={<CreatePostForm projectId={projectId} />}
+              ></OpenModalButton>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

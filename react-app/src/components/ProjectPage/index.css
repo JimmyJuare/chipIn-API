@@ -1,3 +1,11 @@
-.project-page-wrapper{
+.project-page-wrapper {
     display: flex;
+    /* justify-content: center; Remove this line to avoid affecting the project-settings-bar */
+}
+
+.inner-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width:100%;
 }

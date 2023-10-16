@@ -19,12 +19,12 @@ export default function ProjectSettingBar() {
     <>
       <div className="project-bar">
         <OpenModalButton
-          className="edit-project-button"
+          className="modal-button"
           buttonText="edit project"
           modalComponent={<ProjectEditForm projectId={projectId}/>}
         ></OpenModalButton>
         <OpenModalButton
-          className="delete-project-button"
+          className="modal-button"
           buttonText="delete project"
           modalComponent={<DeleteProject projectId={projectId}/>}
         ></OpenModalButton>
