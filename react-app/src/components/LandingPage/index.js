@@ -18,10 +18,13 @@ function LandingPage() {
     ? posts.filter((post) => post.status === "Published")
     : []; 
   const { post_id } = useParams();
+  console.log('this is res', res?.length);
+  console.log('this is posts', posts);
   useEffect(() => {
     dispatch(postStore.getPostsThunk());
     dispatch(projectStore.fetchProjects());
   }, [dispatch]);
+
   if (!posts || posts.length === 0) {
     return <div>Loading...</div>; // Display a loading state until spots are fetched
   }

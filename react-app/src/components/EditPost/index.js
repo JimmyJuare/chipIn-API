@@ -22,16 +22,18 @@ const EditPost = ({ post_id }) => {
   if (foundPost) {
     project_id = foundPost.project_id;
   }
-
   useEffect(() => {
-    const currentPost = dispatch(postStore.getOnePostThunk(post_id));
+    dispatch(postStore.getOnePostThunk(post_id));
+  }, [dispatch, post_id]);
+  
+  useEffect(() => {
 
-    if (currentPost) {
+    if (selectedPost) {
       setTitle(foundPost.title);
       setBody(foundPost.body);
       setStatus(foundPost.status);
     }
-  }, [dispatch]);
+  }, [selectedPost]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,12 +61,13 @@ const EditPost = ({ post_id }) => {
 
     try {
       const editedPost = await dispatch(postStore.editPostThunk(post_id, data));
-      if (editedPost) {
+      if(editedPost){
         console.log("hitting editpost");
-        history.push(`/`);
+        history.push(`/posts/current`);
         closeModal();
-        setRedirect(true);
+
       }
+
     } catch (resErr) {
       console.error(resErr);
       // Handle additional errors if needed
