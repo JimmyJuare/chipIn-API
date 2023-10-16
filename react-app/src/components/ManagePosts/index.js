@@ -26,7 +26,7 @@ export default function ManagePosts() {
   }
   return (
     <>
-      <div className="wrapper">
+      <div className=" manage-wrapper">
         <h2 className="post-header">my posts</h2>
         <div className="post-wrapper">
           {res?.length > 0 && (

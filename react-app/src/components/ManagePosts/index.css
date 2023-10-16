@@ -1,3 +1,10 @@
 .post-header{
     text-align: center;
 }
+.manage-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+}
