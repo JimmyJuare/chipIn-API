@@ -9,6 +9,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import CreatePostForm from "./components/CreatePostForm";
 import ProjectPage from "./components/ProjectPage";
+import ManagePosts from "./components/ManagePosts";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,12 @@ function App() {
           </Route>
           <Route exact path="/projects/:project_id">
             <ProjectPage />
+          </Route>
+          <Route exact path="/posts/current">
+            <ManagePosts />
+          </Route>
+          <Route exact path="/posts/:post_id">
+            <EditPost />
           </Route>
         </Switch>
       )}

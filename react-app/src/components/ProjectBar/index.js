@@ -7,6 +7,7 @@ import { Link } from "react-router-dom/";
 import "./index.css";
 import { useParams } from "react-router-dom";
 import ProjectForm from "../ProjectForm";
+import ManagePosts from "../ManagePosts";
 
 export default function ProjectBar() {
   const projects = useSelector((state) => state.projects.projects || []);
@@ -30,6 +31,12 @@ export default function ProjectBar() {
           buttonText="create project"
           modalComponent={<ProjectForm />}
         ></OpenModalButton>
+        <Link
+              to={`posts/current`}
+              className="manage-posts"
+            >
+              <button>manage posts</button>
+            </Link>
         {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
           filteredProjects.map((project) => (
             <Link
