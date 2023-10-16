@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as postStore from "../../store/posts";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import './index.css'
 export default function DeletePost({post_id}) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -16,11 +16,10 @@ export default function DeletePost({post_id}) {
     dispatch(postStore.deletePostThunk(post_id));
     dispatch(postStore.getPostsThunk());
     closeModal();
-    history.push('/')
   };
 
   return (
-    <div>
+    <div className="delete-button">
       <h1>Delete Post</h1>
       <form onSubmit={handleSubmit}>
         <button onClick={closeModal}>Cancel</button>

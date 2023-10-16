@@ -16,18 +16,47 @@ export default function ProjectForm() {
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  const [description, setDescription] = useState(""); // Default status is draft
-  
+  const [description, setDescription] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (name.length < 3) {
+      setNameError("Project name must be at least 3 characters");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (description.length < 5) {
+      setDescriptionError("Project description must be at least 5 characters");
+      isValid = false;
+    } else {
+      setDescriptionError("");
+    }
+
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     const data = {
       project_name: name,
       project_type: type,
       description,
     };
+
     await dispatch(projectStore.createProject(data));
-    closeModal()
+    closeModal();
   };
+
   return (
     <>
       <form onSubmit={handleSubmit} className="project-form">
@@ -40,6 +69,8 @@ export default function ProjectForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {nameError && <div className="error">{nameError}</div>}
+
         <label htmlFor="type">Project Type</label>
         <select
           id="type"
@@ -52,15 +83,16 @@ export default function ProjectForm() {
           <option value="Music">Music</option>
           <option value="Film">Film</option>
         </select>
+
         <label htmlFor="description">Description</label>
         <textarea
           id="description"
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        >
-         
-        </textarea>
+        />
+        {descriptionError && <div className="error">{descriptionError}</div>}
+
         <button onClick={closeModal}>Cancel</button>
         <button type="submit">Create Project</button>
       </form>

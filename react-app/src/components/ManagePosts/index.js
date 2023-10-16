@@ -36,23 +36,23 @@ export default function ManagePosts() {
                   <div className="post-top">
                     <p className="title">{post.title}</p>
                     {user && user.id === post.user_id && (
-                      <div>
-                        <Link to={`posts/${post.id}`}>
+                      <div className="modal-buttons">
+                        
                           <OpenModalButton
-                            className="edit-button"
+                            className="modal-button"
                             buttonText="Edit Post"
                             modalComponent={<EditPost post_id={post.id} />}
                           ></OpenModalButton>
-                        </Link>
+                        {/* <div className="side-bar"></div> */}
                         <OpenModalButton
-                          className=""
+                          className="modal-button"
                           buttonText="Delete Post"
                           modalComponent={<DeletePost post_id={post.id} />}
                         ></OpenModalButton>
                       </div>
                     )}
                   </div>
-                  <p>{post.body}</p>
+                  <p className="body">{post.body}</p>
                 </div>
               ))}
             </>

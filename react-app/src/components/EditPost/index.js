@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as postStore from "../../store/posts";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-
+import './index.css'
 const EditPost = ({ post_id }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -59,19 +59,14 @@ const EditPost = ({ post_id }) => {
       project_id,
     };
 
-    try {
-      const editedPost = await dispatch(postStore.editPostThunk(post_id, data));
-      if(editedPost){
+      await dispatch(postStore.editPostThunk(post_id, data));
+
         console.log("hitting editpost");
         history.push(`/posts/current`);
-        closeModal();
+        await closeModal();
+      
 
-      }
 
-    } catch (resErr) {
-      console.error(resErr);
-      // Handle additional errors if needed
-    }
   };
 
   return (

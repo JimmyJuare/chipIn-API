@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as postStore from "../../store/posts";
 import * as projectStore from "../../store/projects";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom";
-
+import { useHistory } from "react-router-dom"
+import './index.css'
 const CreatePostForm = ({projectId}) => {
   const history = useHistory();
   const dispatch = useDispatch();

@@ -25,18 +25,19 @@ function Navigation({ isLoaded }) {
         </li>
       )}
       {!user &&(
-			<>
+			<div className="login-and-logout">
 			  <OpenModalButton
 				buttonText="Log In"
-				className=''
+				className='modal-button'
 				modalComponent={<LoginFormModal />}
 			  />
   
 			  <OpenModalButton
 				buttonText="Sign Up"
+        className='modal-button'
 				modalComponent={<SignupFormModal />}
 			  />
-			</>
+			</div>
 		  
       )}
     </ul>

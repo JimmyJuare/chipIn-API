@@ -51,7 +51,7 @@ export default function ProjectPage() {
         {projectIsTrue && (
           <>
             <OpenModalButton
-              className=""
+              className="modal-button"
               buttonText="Create a Post for this project"
               modalComponent={<CreatePostForm projectId={projectId} />}
             ></OpenModalButton>

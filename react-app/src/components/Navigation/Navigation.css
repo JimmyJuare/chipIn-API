@@ -3,21 +3,44 @@
   padding:0;
   font-family: 'Raleway', sans-serif;
   box-sizing: border-box;
+  list-style: none;
 }
 .profile-dropdown {
   position: absolute;
   right: 25px;
+  text-decoration: none;
+  list-style: none;
+  list-style-type: none;
 }
 
 .hidden {
   display: none;
 }
 .navbar{
-  border: 1px solid black;
+  border-bottom: 1px solid #cacaca;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 }
 .logo{
   height:70px;
   width:170px;
+}
+#user-logo {
+  display: inline-block; /* Add this line */
+  font-size: 25px;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  background-color: transparent;
+}
+
+#user-logo-button {
+  display: inline-block; /* Add this line */
+  font-size: 25px;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  background-color: transparent;
 }

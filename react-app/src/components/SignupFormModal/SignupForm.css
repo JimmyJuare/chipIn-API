@@ -1,0 +1,43 @@
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: fit-content;
+    padding: 1rem;
+    justify-content: center;
+  }
+  
+  .signup-form h1 {
+    text-align: center;
+    margin: 1rem;
+  }
+  
+  .signup-form button {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-form ul {
+    padding: 0; /* Remove default padding */
+    list-style: none; /* Remove default list styling */
+    color: #ff0000; /* Set the color for error messages */
+  }
+  
+  .signup-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .signup-form input {
+    outline: none;
+    padding: 0.5rem;
+    border: none;
+    background-color: #cacaca;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  .signup-form input:focus {
+    background-color: #ff385c;
+  }
+  

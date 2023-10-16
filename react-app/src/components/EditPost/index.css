@@ -1,4 +1,65 @@
-.edit-form{
+.edit-form {
     display: flex;
     flex-direction: column;
-}
+    width: 500px;
+    height: fit-content;
+    padding: 1rem;
+    justify-content: center;
+  }
+  
+  .edit-form h1 {
+    text-align: center;
+    margin: 1rem;
+  }
+  .edit-form textarea {
+    resize: none;
+  }
+  
+  .edit-form button {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .edit-form ul {
+    list-style-type: none;
+    padding: 0;
+    color: red; /* Adjust the color as needed */
+  }
+  
+  .edit-form ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .edit-form label {
+    margin-top: 1rem;
+  }
+  
+  .edit-form input,
+  .edit-form textarea {
+    outline: none;
+    padding: 0.5rem;
+    border: none;
+    background-color: #cacaca;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  .edit-form input:focus,
+  .edit-form textarea:focus {
+    background-color: #ff385c; /* Adjust the color as needed */
+  }
+  
+  .edit-form button {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: #ff385c; /* Adjust the color as needed */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+  
+  .edit-form button:hover {
+    background-color: #d81c3a; /* Adjust the hover color as needed */
+  }
+  

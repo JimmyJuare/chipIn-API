@@ -20,7 +20,7 @@ export default function DeleteProject({ projectId}) {
   };
 
   return (
-    <div>
+    <div className="delete-button">
       <h1>Delete Project</h1>
       <form onSubmit={handleSubmit}>
         <button onClick={closeModal}>Cancel</button>

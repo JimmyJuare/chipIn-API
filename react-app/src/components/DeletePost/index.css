@@ -1,0 +1,31 @@
+/* You can adjust these styles based on your design */
+.delete-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .delete-button h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .delete-button button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    background-color: #FF385C; /* Your preferred background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease; /* Smooth transition */
+  
+    /* You can add more styles if needed */
+  }
+  
+  .delete-button button:hover {
+    background-color: #D81B47; /* Change the background color on hover */
+  }
+  

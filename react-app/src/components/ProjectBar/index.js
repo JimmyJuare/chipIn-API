@@ -27,15 +27,14 @@ export default function ProjectBar() {
     <>
       <div className="project-bar">
         <OpenModalButton
-          className="create-project-button"
+          className="modal-button"
           buttonText="create project"
           modalComponent={<ProjectForm />}
         ></OpenModalButton>
         <Link
               to={`posts/current`}
-              className="manage-posts"
             >
-              <button>manage posts</button>
+              <button className="modal-button">manage posts</button>
             </Link>
         {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
           filteredProjects.map((project) => (
@@ -45,7 +44,7 @@ export default function ProjectBar() {
               className="project"
             >
               <div>
-                <p>{project.project_name}</p>
+                <p className="project-name">{project.project_name}</p>
               </div>
             </Link>
           ))

@@ -1,0 +1,33 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height:fit-content;
+    padding: 1rem;
+    justify-content: center;
+}
+.login-form h1{
+    text-align: center;
+    margin: 1rem;
+    
+}
+.login-form button{
+    justify-content: center;
+    align-items: center;
+    
+}
+.inner-form{
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+.inner-form input{
+   outline: none;
+   padding: 0.5rem;
+   border: none;
+   background-color: #cacaca;
+   margin-bottom: 1rem;
+}
+.inner-form input:focus{
+    background-color: #FF385C;
+}
