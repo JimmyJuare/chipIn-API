@@ -38,6 +38,7 @@ function LandingPage() {
         )}
 
         <div className="post-wrapper">
+          {!user && (
           <div className="banner">
             <p className="banner-text">
               <h3>Welcome to <span className="website-name">ChipIn</span></h3>
@@ -57,7 +58,8 @@ function LandingPage() {
               build something extraordinary!
             </p>
           </div>
-          <h3>Posts</h3>
+          )}
+          <h3 className="post-header">Posts</h3>
           {res?.length > 0 && (
             <>
               {res.reverse().map((post, i) => (

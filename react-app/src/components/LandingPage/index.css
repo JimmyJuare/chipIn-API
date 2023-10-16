@@ -23,7 +23,9 @@ body {
     box-sizing: border-box;
     flex: 1;
   }
-  
+  .post-header{
+    margin-top: 1rem;
+  }
   .post {
     margin-top: 2rem;
     justify-content: center;
