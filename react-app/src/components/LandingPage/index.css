@@ -1,67 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  .wrapper {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .body{
-    padding: 1rem;
-    background-color: #e0e0e0;
-  }
-  .post-wrapper {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align posts to the start */
-    align-items: center;
-    overflow-y: auto; /* Add scroll for the post wrapper */
-    box-sizing: border-box;
-    flex: 1;
-  }
-  .post-header{
-    margin-top: 1rem;
-  }
-  .post {
-    margin-top: 2rem;
-    justify-content: center;
-    align-items: center;
-    width: 280px;
-    height: 200px;
-  }
-  
-  .title {
-    text-align: center;
-    border-bottom: 1px solid #cacaca;
-    border-top: 1px solid #cacaca;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-  
-  .single-post {
-    text-decoration: none;
-    color: black;
-  }
-  .banner{
-    width: 100%;
-    background: linear-gradient(to left, #FF385C, #ffffff); /* Adjust the color values as needed */
-    margin-bottom: 1rem; 
-   }
-    .banner-text {
-      text-align: center;
-      padding: 1rem;
-      font-size: 14px;
-  }
-  
-  .website-name{
-    color: #FF385C;
-    font-weight:bold;
-    text-shadow: none;
-  }
-  
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.wrapper {
+  overflow: auto;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.body {
+  flex: 1; /* Take up the available space */
+  padding: 1rem;
+  background-color: #e0e0e0;
+}
+
+.post-wrapper {
+  width: 100%;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.post-header {
+  margin-top: 1rem;
+}
+
+.post {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 200px;
+}
+
+.title {
+  text-align: center;
+  border-bottom: 1px solid #cacaca;
+  border-top: 1px solid #cacaca;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.single-post {
+  text-decoration: none;
+  color: black;
+}
+
+.banner {
+  width: 100%;
+  background: linear-gradient(to left, #ff385c, #ffffff);
+  margin-bottom: 1rem;
+}
+
+.banner-text {
+  text-align: center;
+  padding: 1rem;
+  font-size: 14px;
+}
+
+.website-name {
+  color: #ff385c;
+  font-weight: bold;
+  text-shadow: none;
+}
