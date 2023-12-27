@@ -14,7 +14,8 @@ class Project(db.Model):
     image_url = db.Column(db.String(255), nullable=True) # , nullable=False
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user = db.relationship('User', backref='projects')
-    posts = db.relationship('Post', back_populates='project', cascade='all ,delete')
+    posts = db.relationship('Post', back_populates='project', cascade='all, delete')
+    user_projects = db.relationship('UserProject', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

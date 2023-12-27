@@ -36,6 +36,7 @@ export default function ProjectBar() {
             >
               <button className="modal-button">manage posts</button>
             </Link>
+            <h2 className="project-bar-header">My Projects</h2>
         {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
           filteredProjects.map((project) => (
             <Link
@@ -49,7 +50,7 @@ export default function ProjectBar() {
             </Link>
           ))
         ) : (
-          <p>No projects available</p>
+          <p className="no-projects">No Projects</p>
         )}
       </div>
     </>

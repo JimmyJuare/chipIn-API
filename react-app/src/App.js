@@ -45,6 +45,9 @@ function App() {
           <Route exact path="/posts/:post_id">
             <EditPost />
           </Route>
+          <Route exact path="/posts/:post_id">
+
+          </Route>
         </Switch>
       )}
     </>

@@ -1,0 +1,74 @@
+/* Add the custom scrollbar styles */
+.search-results {
+    position: absolute;
+    top: 70px;
+    background-color: #FF385C;
+    padding: 20px;
+    width: 450px;
+    max-height: 300px;
+    overflow-y: scroll;
+    border-radius: 2rem;
+    color: white;
+    box-sizing: border-box;
+  }
+.search-results h2{
+    text-align: center;
+    text-decoration: underline;
+  }
+.search-result {
+    /* display: flex; */
+  }
+.search-result-info{
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-req-button{
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    color: white;
+    background:#FF385C;
+    border: 1px solid white;
+  }
+  .search-result-divider{
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin: 1rem 0;
+  }
+  /* Styles for the scrollbar track (the area the thumb moves in) */
+  .search-results::-webkit-scrollbar {
+    width: 6px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the scrollbar thumb (the draggable handle) */
+  .search-results::-webkit-scrollbar-thumb {
+    box-sizing: border-box;
+    background-color: white; /* Set the color of the thumb */
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+.search-bar{
+    display: flex;
+    box-sizing: border-box;
+    padding:20px; 
+    width: 450px;
+    border-radius: 2rem;
+    font-size: large;
+    outline: none;
+    border: none;
+    background-color: #e0e0e0;
+    color: black;
+  }
+  .search-bar:focus{
+    background-color: #FF385C;
+    color: white;
+    border-radius: 2rem;
+  }
+  .search-bar:focus::placeholder{
+    color: white;
+  }

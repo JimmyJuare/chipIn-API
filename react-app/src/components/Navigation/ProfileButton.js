@@ -44,13 +44,12 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user && (
-          <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+          <div  id="profile-data">
+            <li>{user.username}'s settings</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button id="logout-button" onClick={handleLogout}>Log Out</button>
             </li>
-          </>
+          </div>
         )}
       </ul>
     </>

@@ -27,8 +27,8 @@ function SignupFormModal() {
       setErrors(["Email must contain '@' sign"]);
     } else if (email.length < 5 || username.length < 3) {
       setErrors(["Email must have a min length of 5 and Username must have a  min length of 3"]);
-    } else if (email.length > 20 || username.length > 20) {
-      setErrors(["Email and Username must be at less than 20 characters"]);
+    } else if (email.length > 50 || username.length > 50) {
+      setErrors(["Email and Username must be at less than 50 characters"]);
     } else {
       const data = await dispatch(signUp(username, email, password));
       if (data) {

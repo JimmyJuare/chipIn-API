@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Project
+from app.models import db, Project, JoinRequest
 from app.forms import ProjectForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_helper import (
@@ -54,6 +54,28 @@ def create_project():
         return new_project.to_dict(), 201
     return form.errors, 404
 
+@projects_bp.route('/<int:project_id>/join', methods=['POST'])
+def join_project(project_id):
+    # Check if the user has already sent a request
+    existing_request = JoinRequest.query.filter_by(sender_id=current_user.id, project_id=project_id).first()
+    if existing_request:
+        return jsonify({'message': 'You have already sent a request to join this project.'}), 400
+
+    # Create a new join request
+    join_request = JoinRequest(sender_id=current_user.id, project_id=project_id)
+    db.session.add(join_request)
+    db.session.commit()
+
+    return jsonify({'message': 'Join request sent successfully.'})
+
+@projects_bp.route('/<int:user_id>/join-requests', methods=['GET'])
+def get_join_requests(user_id):
+    # Get all join requests for a specific project
+    join_requests = JoinRequest.query.filter_by(sender_id=user_id).all()
+
+    # Return the list of join requests
+    return jsonify({'join_requests': [request.to_dict() for request in join_requests]})
+
 
 @projects_bp.route('/<int:project_id>', methods=['PUT'])
 def update_project(project_id):
@@ -91,16 +113,26 @@ def update_project(project_id):
     return form.errors, 404
 
 
+from sqlalchemy.exc import SQLAlchemyError
+
 @projects_bp.route('/<int:project_id>', methods=['DELETE'])
 @login_required
 def delete_project(project_id):
-    project = Project.query.get(project_id)
-    if not project:
-        return jsonify({'error': 'Project not found'}), 404
-    if current_user.id != project.user_id:
-        return jsonify({'error': 'You do not own this project'}), 404
+    try:
+        project = Project.query.get(project_id)
+        if not project:
+            return jsonify({'error': 'Project not found'}), 404
+        if current_user.id != project.user_id:
+            return jsonify({'error': 'You do not own this project'}), 403
 
-    db.session.delete(project)
-    db.session.commit()
+        # Attempt to delete the project and commit the changes
+        db.session.delete(project)
+        db.session.commit()
 
-    return jsonify({'message': 'Project deleted successfully'}), 200
+        return jsonify({'message': 'Project deleted successfully'}), 200
+
+    except SQLAlchemyError as e:
+        # If there's an error, log it and rollback the session
+        projects_bp.logger.error(f"Error deleting project (ID: {project_id}): {str(e)}")
+        db.session.rollback()
+        return jsonify({'error': 'Internal Server Error'}), 500

@@ -1,1 +1,7 @@
 /* TODO Add site wide styles */
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: local('SourceSansPro-Regular'), url('./fonts/SourceSansPro-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }

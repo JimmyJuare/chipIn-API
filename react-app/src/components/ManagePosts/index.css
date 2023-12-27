@@ -2,6 +2,10 @@
     text-align: center;
     color: #FF385C;
   }
+.draft-header {
+    text-align: center;
+    color: #FF385C;
+    }
   
   .manage-wrapper {
     display: flex;
@@ -14,10 +18,10 @@
   .modal-button {
     border: none;
     padding: 1rem;
-    flex: 1; /* Each button takes up half of the available space */
     text-align: center;
     justify-content: center;
     cursor: pointer;
+    width: 100%;
   }
 
   .modal-button:hover {

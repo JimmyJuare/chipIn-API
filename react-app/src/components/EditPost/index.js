@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import * as postStore from "../../store/posts";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-import './index.css'
+import "./index.css";
 const EditPost = ({ post_id }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [status, setStatus] = useState("draft"); // Default status is draft
+  const [status, setStatus] = useState(""); // Default status is draft
   const [errors, setErrors] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const allPosts = useSelector((state) => state.posts.posts);
   const selectedPost = useSelector((state) => state.posts.currentPost || []);
 
   const foundPost = allPosts.find((post) => post.id === post_id);
+  console.log("status", status)
   let project_id = null;
 
   if (foundPost) {
@@ -25,10 +26,9 @@ const EditPost = ({ post_id }) => {
   useEffect(() => {
     dispatch(postStore.getOnePostThunk(post_id));
   }, [dispatch, post_id]);
-  
-  useEffect(() => {
 
-    if (selectedPost) {
+  useEffect(() => {
+    if (foundPost) {
       setTitle(foundPost.title);
       setBody(foundPost.body);
       setStatus(foundPost.status);
@@ -46,6 +46,7 @@ const EditPost = ({ post_id }) => {
     if (body.length < 5) {
       newErrors.push("Body must be at least 5 characters");
     }
+    
 
     if (newErrors.length > 0) {
       setErrors(newErrors);
@@ -55,18 +56,15 @@ const EditPost = ({ post_id }) => {
     const data = {
       title,
       body,
-      status: "Published",
-      project_id,
+      status,
+      project_id
     };
 
-      await dispatch(postStore.editPostThunk(post_id, data));
+    await dispatch(postStore.editPostThunk(post_id, data));
 
-        console.log("hitting editpost");
-        history.push(`/posts/current`);
-        await closeModal();
-      
-
-
+    console.log("hitting editpost");
+    history.push(`/posts/current`);
+    await closeModal();
   };
 
   return (
@@ -94,8 +92,19 @@ const EditPost = ({ post_id }) => {
           value={body}
           onChange={(e) => setBody(e.target.value)}
         />
+        <label htmlFor="type">Type</label>
+        <select
+          id="status"
+          name="status"
+          className="status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+        >
+          <option value="Draft">Draft</option>
+          <option value="Published">Published</option>
+        </select>
         <button onClick={closeModal}>Cancel</button>
-        <button type="submit">Edit Post</button>
+        <button className="edit-button" type="submit">Edit Post</button>
       </form>
     </div>
   );

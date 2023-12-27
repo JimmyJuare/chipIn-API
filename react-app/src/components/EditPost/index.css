@@ -35,7 +35,8 @@
   }
   
   .edit-form input,
-  .edit-form textarea {
+  .edit-form textarea,
+  .edit-form select {
     outline: none;
     padding: 0.5rem;
     border: none;
@@ -62,4 +63,6 @@
   .edit-form button:hover {
     background-color: #d81c3a; /* Adjust the hover color as needed */
   }
-  
+  .edit-button{
+    margin-left: 1rem;
+  }
