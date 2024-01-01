@@ -43,10 +43,6 @@ function LandingPage() {
           {!user && (
             <div className="banner">
               <p className="banner-text">
-                <h3>
-                  Welcome to <span className="website-name">ChipIn</span>
-                </h3>
-                <br></br>
                 the ultimate hub for global collaboration and project
                 innovation. Say goodbye to the struggles of finding partners on
                 scattered Discord servers. Our platform is tailored for
