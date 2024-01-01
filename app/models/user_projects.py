@@ -7,9 +7,9 @@ class UserProject(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True)
-    project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), primary_key=True)
-    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')))
+    post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
     user = db.relationship('User', backref='user_projects')
     
     # Add a relationship to the Project model    
