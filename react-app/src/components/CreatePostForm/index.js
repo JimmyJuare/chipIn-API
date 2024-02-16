@@ -18,7 +18,7 @@ const CreatePostForm = ({ projectId }) => {
   const posts = useSelector((state) => state.posts?.userPosts || []);
   const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
-  console.log('this is the project_id', projectId);
+ 
 
   useEffect(() => {
     dispatch(projectStore.fetchUserProjects(user.id));

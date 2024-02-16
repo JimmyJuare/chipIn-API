@@ -20,8 +20,7 @@ export default function ManagePosts() {
   const draftArray = Array.isArray(posts)
     ? posts.filter((post) => post.status === "Draft" && post.user_id === user.id)
     : [];
-    console.log('this is the draft array', draftArray)
-    console.log('this is the post array', res)
+
   const { post_id } = useParams();
   useEffect(() => {
     dispatch(postStore.getPostsThunk());

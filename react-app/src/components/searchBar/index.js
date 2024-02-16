@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as projectStore from "../../store/projects";
 import "./index.css";
 
@@ -16,6 +16,7 @@ const SearchBar = () => {
     await dispatch(projectStore.requestToJoinProject(project_id));
     await dispatch(projectStore.fetchJoinRequests(user?.id));
   };
+  
   const handlePostSearch = (value) => {
     setSearch(value);
     if (value.trim() === "") {
@@ -35,8 +36,8 @@ const SearchBar = () => {
         })
       );
     }
-    console.log(searchResults);
   };
+
   return (
     <div className="search-div">
       <input
@@ -53,26 +54,26 @@ const SearchBar = () => {
               <div className="search-result-divider"></div>
               <h3>{post.title}</h3>
               <div className="search-result-info">
-              <p>{post.body}</p>
-              {user && user.id !== post.user_id && (
-                      <>
-                        {joinRequest.some(
-                          (request) => request.project_id === post.project_id
-                        ) ? (
-                          <button className="sent-req-button" disabled>
-                            Request Sent
-                          </button>
-                        ) : (
-                          <button
-                            className="search-req-button"
-                            onClick={() => handleJoinRequest(post.project_id)}
-                          >
-                            Request
-                          </button>
-                        )}
-                      </>
+                <p>{post.body}</p>
+                {user && user.id !== post.user_id && (
+                  <>
+                    {joinRequest.some(
+                      (request) => request.project_id === post.project_id
+                    ) ? (
+                      <button className="sent-req-button" disabled>
+                        Request Sent
+                      </button>
+                    ) : (
+                      <button
+                        className="search-req-button"
+                        onClick={() => handleJoinRequest(post.project_id)}
+                      >
+                        Request
+                      </button>
                     )}
-                    </div>
+                  </>
+                )}
+              </div>
             </div>
           ))}
         </div>

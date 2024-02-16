@@ -14,8 +14,7 @@ function LandingPage() {
   const PublishedArray = Array.isArray(posts)
     ? posts.filter((post) => post.status === "Published")
     : [];
-  console.log("this is the published array", PublishedArray);
-  console.log("this is the join request array", joinRequest);
+
 
   useEffect(() => {
     dispatch(postStore.getPostsThunk());

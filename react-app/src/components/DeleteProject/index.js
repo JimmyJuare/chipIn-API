@@ -10,7 +10,7 @@ export default function DeleteProject({ projectId}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
-  console.log('this is the id', projectId);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(projectStore.removeProject(projectId));

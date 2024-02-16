@@ -72,7 +72,7 @@ export const deletePostThunk = (postId) => async (dispatch) => {
 
 export const editPostThunk = (post_id, data) => async (dispatch) => {
   try {
-    console.log("Editing post...");
+
     const response = await fetch(`/api/posts/${post_id}`, {
       method: "PUT",
       headers: {
@@ -83,7 +83,7 @@ export const editPostThunk = (post_id, data) => async (dispatch) => {
 
     if (response.ok) {
       const updatedPost = await response.json();
-      console.log("this is the updated post", updatedPost);
+
       dispatch(editPost(updatedPost));
     } else {
       console.error("Error occurred:", response);
@@ -93,7 +93,7 @@ export const editPostThunk = (post_id, data) => async (dispatch) => {
   }
 };
 export const addPostThunk = (postData, newImage) => async (dispatch) => {
-  console.log("this is the post data", postData);
+
   try {
     let res;
     if (newImage) {
@@ -102,7 +102,7 @@ export const addPostThunk = (postData, newImage) => async (dispatch) => {
         body: postData,
       });
     } else {
-      console.log("hitting the thunk");
+
       res = await fetch("/api/posts/create", {
         method: "POST",
         headers: {

@@ -159,8 +159,7 @@ export const fetchUserProjects = (userId) => async (dispatch) => {
 
 export const requestToJoinProject = (projectId) => async (dispatch) => {
   try {
-    console.log("Sending join request...");
-    console.log("Project ID:", projectId);
+
     dispatch(joinRequestStart());
     const response = await fetch(`/api/projects/${projectId}/join`, {
       method: "POST",
@@ -168,10 +167,10 @@ export const requestToJoinProject = (projectId) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     });
-    console.log("Response:", response);
+
     if (response.ok) {
       dispatch(sendJoinRequest(projectId));
-      console.log("Join request sent successfully.");
+
     } else {
       console.error("Error sending join request:", response.statusText);
     }

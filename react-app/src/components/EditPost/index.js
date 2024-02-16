@@ -17,7 +17,7 @@ const EditPost = ({ post_id }) => {
   const selectedPost = useSelector((state) => state.posts.currentPost || []);
 
   const foundPost = allPosts.find((post) => post.id === post_id);
-  console.log("status", status)
+
   let project_id = null;
 
   if (foundPost) {
@@ -62,7 +62,7 @@ const EditPost = ({ post_id }) => {
 
     await dispatch(postStore.editPostThunk(post_id, data));
 
-    console.log("hitting editpost");
+
     history.push(`/posts/current`);
     await closeModal();
   };
