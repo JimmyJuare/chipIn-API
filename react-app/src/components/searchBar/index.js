@@ -26,6 +26,7 @@ const SearchBar = () => {
       setSearchResults(
         posts.filter((post) => {
           return (
+            
             (post.title.toLowerCase().includes(value.toLowerCase()) &&
               post.status === "Published") ||
             (post.body.toLowerCase().includes(value.toLowerCase()) &&
