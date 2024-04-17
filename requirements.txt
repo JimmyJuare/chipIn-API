@@ -24,4 +24,4 @@ SQLAlchemy==1.4.46
 urllib3==1.26.17
 Werkzeug==2.2.2
 WTForms==3.0.1
-
+pytz==2022.1
