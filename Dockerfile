@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && pip install pytz && pip install psycopg2
 
 # Copy the entire Flask application code to the container
 COPY app/ app/
