@@ -20,7 +20,7 @@ function LandingPage() {
     dispatch(postStore.getPostsThunk());
     dispatch(projectStore.fetchProjects());
     dispatch(projectStore.fetchJoinRequests(user?.id));
-  }, [dispatch]);
+  }, [dispatch, user?.id]);
 
   if (!posts || posts.length === 0) {
     return <div>Loading...</div>; // Display a loading state until spots are fetched

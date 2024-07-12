@@ -14,8 +14,6 @@ const CreatePostForm = ({ projectId }) => {
   const [imageLoading, setImageLoading] = useState(false);
   const [error, setErrors] = useState("");
   const [imageInput, setImageInput] = useState("");
-  const projects = useSelector((state) => state.projects?.userProjects || []);
-  const posts = useSelector((state) => state.posts?.userPosts || []);
   const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
  
@@ -23,7 +21,7 @@ const CreatePostForm = ({ projectId }) => {
   useEffect(() => {
     dispatch(projectStore.fetchUserProjects(user.id));
     dispatch(postStore.getUserPostsThunk(user.id));
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

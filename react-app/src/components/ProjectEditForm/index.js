@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import * as projectStore from "../../store/projects";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProjectEditForm = ({ projectId }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const project = useSelector((state) => state.projects.currentProject || []);
-  const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [error, setErrors] = useState("");
@@ -23,7 +21,7 @@ const ProjectEditForm = ({ projectId }) => {
       setType(project.project_type);
       setDescription(project.description);
     }
-  }, [dispatch]);
+  }, [dispatch, project, projectId]);
 
   const validateForm = () => {
     let isValid = true;

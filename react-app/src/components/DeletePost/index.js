@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as postStore from "../../store/posts";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import './index.css'
 export default function DeletePost({post_id}) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   // const { server_id } = useParams();

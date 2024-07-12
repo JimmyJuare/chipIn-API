@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import * as postStore from "../../store/posts";
-import * as projectStore from "../../store/projects";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import EditPost from "../EditPost";
-import { Link } from "react-router-dom/";
 import "./index.css";
 import { useParams } from "react-router-dom";
 import DeletePost from "../DeletePost";
-import ProjectBar from "../ProjectBar";
 export default function ManagePosts() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts?.posts || []);
-  const test = useSelector((state) => state);
   const user = useSelector((state) => state.session.user);
   const res = Array.isArray(posts)
     ? posts.filter((post) => post.status === "Published" && post.user_id === user.id)

@@ -12,7 +12,6 @@ const EditPost = ({ post_id }) => {
   const [body, setBody] = useState("");
   const [status, setStatus] = useState(""); // Default status is draft
   const [errors, setErrors] = useState([]);
-  const [redirect, setRedirect] = useState(false);
   const allPosts = useSelector((state) => state.posts.posts);
   const selectedPost = useSelector((state) => state.posts.currentPost || []);
 
@@ -33,7 +32,7 @@ const EditPost = ({ post_id }) => {
       setBody(foundPost.body);
       setStatus(foundPost.status);
     }
-  }, [selectedPost]);
+  }, [selectedPost, foundPost]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

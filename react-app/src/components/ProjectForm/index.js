@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as projectStore from "../../store/projects";
-import { useDispatch, useSelector } from "react-redux";
-import OpenModalButton from "../OpenModalButton";
-import EditPost from "../EditPost";
-import { Link } from "react-router-dom/";
+import { useDispatch } from "react-redux";
 import "./index.css";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom";
 
 export default function ProjectForm() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const projects = useSelector((state) => state.projects || []);
-  const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");

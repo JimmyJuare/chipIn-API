@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as projectStore from "../../store/projects";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
-import EditPost from "../EditPost";
-import { Link } from "react-router-dom/";
 import "./index.css";
-import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom";
 import * as postStore from "../../store/posts";
 
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -16,7 +12,6 @@ import CreatePostForm from "../CreatePostForm";
 // ... (imports)
 
 export default function ProjectPage() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts?.posts || []);
   const project = useSelector((state) => state.projects.currentProject || []);
@@ -28,7 +23,7 @@ export default function ProjectPage() {
     dispatch(projectStore.fetchProject(project_id));
     dispatch(projectStore.fetchUserProjects(user.id));
     dispatch(postStore.getUserPostsThunk(user.id));
-  }, [dispatch]);
+  }, [dispatch, project_id, user.id]);
 
   // Check if there are any posts associated with the current project
   const hasPosts = posts.some((post) => post.project_id === projectId);

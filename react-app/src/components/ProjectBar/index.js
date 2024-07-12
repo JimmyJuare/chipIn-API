@@ -1,13 +1,10 @@
-import React, { useDebugValue, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as projectStore from "../../store/projects";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
-import EditPost from "../EditPost";
 import { Link } from "react-router-dom/";
 import "./index.css";
-import { useParams } from "react-router-dom";
 import ProjectForm from "../ProjectForm";
-import ManagePosts from "../ManagePosts";
 
 export default function ProjectBar() {
   const projects = useSelector((state) => state.projects.projects || []);
@@ -21,7 +18,7 @@ export default function ProjectBar() {
   }
   useEffect(() => {
     dispatch(projectStore.fetchUserProjects(user.id));
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
   return (
     <>
