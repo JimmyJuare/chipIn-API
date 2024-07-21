@@ -10,12 +10,14 @@ class JoinRequest(db.Model):
                           
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    receiver_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')))
     post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
     status = db.Column(db.String, default="pending")  # 'pending', 'accepted', 'declined'
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     sender = db.relationship('User', foreign_keys=[sender_id])
+    receiver = db.relationship('User', foreign_keys=[receiver_id])
     project = db.relationship('Project', foreign_keys=[project_id])
     post = db.relationship('Post', foreign_keys=[post_id])
 
@@ -32,7 +34,7 @@ class JoinRequest(db.Model):
         return {
             'id': self.id,
             'sender_id': self.sender_id,
-            'receiver_id': self.project.user_id,
+            'receiver_id': self.receiver_id,
             'project_id': self.project_id,
             'post_id': self.post_id,
             'status': self.status,

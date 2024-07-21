@@ -56,13 +56,21 @@ def create_project():
 
 @projects_bp.route('/<int:project_id>/join', methods=['POST'])
 def join_project(project_id):
+     # Fetch the project to get the receiver_id
+    project = Project.query.get(project_id)
+    if not project:
+        return jsonify({'message': 'Project not found.'}), 404
     # Check if the user has already sent a request
     existing_request = JoinRequest.query.filter_by(sender_id=current_user.id, project_id=project_id).first()
     if existing_request:
         return jsonify({'message': 'You have already sent a request to join this project.'}), 400
 
     # Create a new join request
-    join_request = JoinRequest(sender_id=current_user.id, project_id=project_id)
+    join_request = JoinRequest(
+        sender_id=current_user.id,
+        receiver_id=project.user_id,
+        project_id=project_id
+        )
     db.session.add(join_request)
     db.session.commit()
 

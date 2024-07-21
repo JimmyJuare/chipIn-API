@@ -5,7 +5,7 @@ from datetime import datetime
 def seed_join_requests():
     join_request1 = JoinRequest(
         sender_id=1,  # Replace with the actual user IDs
-
+        receiver_id=2,  # Replace with the actual user IDs
         project_id=7,  # Replace with the actual project ID
         post_id=7,  # Replace with the actual post ID
         status='pending',
@@ -14,7 +14,7 @@ def seed_join_requests():
 
     join_request2 = JoinRequest(
         sender_id=3,  # Replace with the actual user IDs
-
+        receiver_id=1,
         project_id=2,  # Replace with the actual project ID
         post_id=2,  # Replace with the actual project ID
         status='pending',
@@ -23,6 +23,7 @@ def seed_join_requests():
 
     join_request3 = JoinRequest(
         sender_id=2,  # Replace with the actual user IDs
+        receiver_id=1,
         project_id=1,  # Replace with the actual project ID
         post_id=1,  # Replace with the actual project ID
         status='accepted',
@@ -31,6 +32,7 @@ def seed_join_requests():
 
     join_request4 = JoinRequest(
         sender_id=1,  # Replace with the actual user IDs
+        receiver_id=3, # Replace with the actual reciever IDs
         project_id=13,  # Replace with the actual project ID
         post_id=13,  # Replace with the actual project ID
         status='declined',
