@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import db, Project, JoinRequest
+from app.models import db, Project, JoinRequest, Post
 from app.forms import ProjectForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.aws_helper import (
@@ -60,6 +60,12 @@ def join_project(project_id):
     project = Project.query.get(project_id)
     if not project:
         return jsonify({'message': 'Project not found.'}), 404
+    
+    posts = Post.query.all()
+    
+    filtered_post = [post for post in posts if post.project_id == project_id]
+    if not project:
+        return jsonify({'message': 'Project not found.'}), 404
     # Check if the user has already sent a request
     existing_request = JoinRequest.query.filter_by(sender_id=current_user.id, project_id=project_id).first()
     if existing_request:
@@ -69,6 +75,7 @@ def join_project(project_id):
     join_request = JoinRequest(
         sender_id=current_user.id,
         receiver_id=project.user_id,
+        post_id=filtered_post[0].id,
         project_id=project_id
         )
     db.session.add(join_request)

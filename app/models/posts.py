@@ -16,7 +16,8 @@ class Post(db.Model):
     status = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime)
     project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
-    project = db.relationship('Project', back_populates='posts')
+    
+    project = db.relationship('Project', back_populates='posts', foreign_keys=[project_id])
 
 
     def to_dict(self):

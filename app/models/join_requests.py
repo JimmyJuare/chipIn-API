@@ -15,6 +15,7 @@ class JoinRequest(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('posts.id')))
     status = db.Column(db.String, default="pending")  # 'pending', 'accepted', 'declined'
     created_at = db.Column(db.DateTime, default=datetime.now)
+    
 
     sender = db.relationship('User', foreign_keys=[sender_id])
     receiver = db.relationship('User', foreign_keys=[receiver_id])
