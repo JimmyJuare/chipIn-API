@@ -122,3 +122,6 @@ body {
   font-weight: bold;
   text-shadow: none;
 }
+#button-container{
+  display: flex;
+}

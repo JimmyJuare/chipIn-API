@@ -151,3 +151,21 @@ def delete_project(project_id):
         projects_bp.logger.error(f"Error deleting project (ID: {project_id}): {str(e)}")
         db.session.rollback()
         return jsonify({'error': 'Internal Server Error'}), 500
+
+@projects_bp.route('/<int:project_id>/cancel-join', methods=['DELETE'])
+@login_required
+def cancel_join_request(project_id):
+    try:
+        join_request = JoinRequest.query.filter_by(sender_id=current_user.id, project_id=project_id).first()
+        if not join_request:
+            return jsonify({'error': 'Join request not found'}), 404
+
+        db.session.delete(join_request)
+        db.session.commit()
+
+        return jsonify({'message': 'Join request cancelled successfully'}), 200
+
+    except SQLAlchemyError as e:
+        projects_bp.logger.error(f"Error cancelling join request for project (ID: {project_id}): {str(e)}")
+        db.session.rollback()
+        return jsonify({'error': 'Internal Server Error'}), 500

@@ -23,8 +23,7 @@ function LoginFormModal() {
   const demoUser = async() => {
     const email = 'demo@aa.io'
     const  password = 'password'
-        const demoData = await dispatch(login(email, password)
-      );
+    await dispatch(login(email, password));
 
       closeModal()
 
@@ -32,8 +31,7 @@ function LoginFormModal() {
   const demoUser2 = async() => {
     const email = 'marnie@aa.io'
     const  password = 'password'
-        const demoData = await dispatch(login(email, password)
-      );
+    await dispatch(login(email, password));
 
       closeModal()
 

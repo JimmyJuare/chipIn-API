@@ -28,7 +28,7 @@ class Post(db.Model):
             'user_id': self.user_id,
             'image_url':self.image_url,
             'project_id': self.project_id,
-            'project_type': self.project.project_type,
+            'project_type': self.project.project_type if self.project else None,
             'status': self.status,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
         }

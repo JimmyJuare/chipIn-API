@@ -10,6 +10,7 @@ export const JOIN_REQUEST_FAILURE = "projects/JOIN_REQUEST_FAILURE";
 export const GET_JOIN_REQUESTS = "projects/GET_JOIN_REQUESTS";
 export const JOIN_REQUEST_START = "projects/JOIN_REQUEST_START";
 export const JOIN_REQUEST_END = "projects/JOIN_REQUEST_END";
+export const CANCEL_REQUEST = "projects/CANCEL_REQUEST";
 // In your action creators file
 // Action creators
 export const joinRequestSuccess = () => ({
@@ -55,6 +56,9 @@ export const getJoinRequests = (joinRequests) => ({
 });
 export const joinRequestStart = () => ({
   type: JOIN_REQUEST_START,
+});
+export const cancelJoinRequest = () => ({
+  type: CANCEL_REQUEST,
 });
 export const joinRequestEnd = () => ({
   type: JOIN_REQUEST_END,
@@ -181,6 +185,20 @@ export const requestToJoinProject = (projectId) => async (dispatch) => {
     dispatch(joinRequestEnd());
   }
 };
+export const cancelJoinReq = (projectId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/projects/${projectId}/cancel-join`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(cancelJoinRequest());
+    } else {
+      console.error("Error cancelling join request:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error cancelling join request:", error);
+  }
+};
 export const fetchJoinRequests = (userId) => async (dispatch) => {
   try {
     const response = await fetch(`/api/projects/${userId}/join-requests`);
@@ -227,10 +245,8 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         isJoinRequestPending: false, // Reset the flag
-        // You might want to update other parts of the state as needed
       };
 
-    // Assuming you have another action type to handle the failure of the join request
     case GET_JOIN_REQUESTS:
       return { ...state, joinRequests: action.joinRequests };
 
@@ -243,6 +259,11 @@ const projectReducer = (state = initialState, action) => {
 
     case GET_USER_PROJECTS:
       return { ...state, userProjects: action.userProjects };
+    case CANCEL_REQUEST:
+      return {
+        ...state,
+        isJoinRequestPending: false, // Reset the flag when a request is cancelled
+      };
     default:
       return state;
   }

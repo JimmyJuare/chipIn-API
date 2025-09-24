@@ -29,6 +29,10 @@ function LandingPage() {
     await dispatch(projectStore.requestToJoinProject(project_id));
     await dispatch(projectStore.fetchJoinRequests(user?.id));
   };
+  const handleJoinCancel = async (project_id) => {
+    await dispatch(projectStore.cancelJoinReq(project_id));
+    await dispatch(projectStore.fetchJoinRequests(user?.id));
+  };      
   return (
     <>
       <div className="wrapper">
@@ -69,12 +73,18 @@ function LandingPage() {
                     <p className="post-body">{post.body}</p>
                     {user && user.id !== post.user_id && (
                       <>
-                        {joinRequest.some(
-                          (request) => request.project_id === post.project_id
-                        ) ? (
+                        {joinRequest.some((request) => request.project_id === post.project_id) ? (
+                          <div id="button-container">
                           <button className="sent-req-button" disabled>
                             Request Sent
                           </button>
+                          <button
+                            className="req-button"
+                            onClick={() => handleJoinCancel(post.project_id)}
+                          >
+                            Cancel Request
+                          </button>
+                          </div>
                         ) : (
                           <button
                             className="req-button"
