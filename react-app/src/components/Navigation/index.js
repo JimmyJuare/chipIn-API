@@ -25,6 +25,7 @@ function Navigation({ isLoaded }) {
       <ul>
         <SearchBar />
       </ul>
+      
       {isLoaded && user && (
         <li>
           <ProfileButton user={sessionUser} />

@@ -15,7 +15,6 @@ function LandingPage() {
     ? posts.filter((post) => post.status === "Published")
     : [];
 
-
   useEffect(() => {
     dispatch(postStore.getPostsThunk());
     dispatch(projectStore.fetchProjects());
@@ -75,9 +74,6 @@ function LandingPage() {
                       <>
                         {joinRequest.some((request) => request.project_id === post.project_id) ? (
                           <div id="button-container">
-                          <button className="sent-req-button" disabled>
-                            Request Sent
-                          </button>
                           <button
                             className="req-button"
                             onClick={() => handleJoinCancel(post.project_id)}
@@ -90,7 +86,7 @@ function LandingPage() {
                             className="req-button"
                             onClick={() => handleJoinRequest(post.project_id)}
                           >
-                            Request
+                            Request to join
                           </button>
                         )}
                       </>

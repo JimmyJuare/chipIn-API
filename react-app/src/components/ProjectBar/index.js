@@ -33,7 +33,7 @@ export default function ProjectBar() {
             >
               <button className="modal-button">manage posts</button>
             </Link>
-            <h2 className="project-bar-header">My Projects</h2>
+            <h3 className="project-bar-header">My Projects</h3>
         {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
           filteredProjects.map((project) => (
             <Link
