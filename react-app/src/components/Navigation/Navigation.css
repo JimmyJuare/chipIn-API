@@ -83,3 +83,16 @@
 .login-logout:hover {
   background-color: #FF385C;
 }
+
+.light-theme-icon:hover{
+  cursor: pointer;
+}
+.dark-theme-icon:hover{
+  cursor: pointer;
+}
+.light-theme-icon{
+  color: #808080;
+}
+.dark-theme-icon{
+  color: #808080;
+}

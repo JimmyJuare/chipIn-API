@@ -21,6 +21,14 @@ function LandingPage() {
     dispatch(projectStore.fetchJoinRequests(user?.id));
   }, [dispatch, user?.id]);
 
+  // const startCoolDown = () => {
+  //   const mybutton = document.getElementById("canc-req-button");
+  //   mybutton.disabled = true;
+  //   setTimeout(function () {
+  //     mybutton.disabled = false;
+  //   }, 3000);
+  // }
+
   if (!posts || posts.length === 0) {
     return <div>Loading...</div>; // Display a loading state until spots are fetched
   }
@@ -31,7 +39,7 @@ function LandingPage() {
   const handleJoinCancel = async (project_id) => {
     await dispatch(projectStore.cancelJoinReq(project_id));
     await dispatch(projectStore.fetchJoinRequests(user?.id));
-  };      
+  };
   return (
     <>
       <div className="wrapper">
@@ -74,12 +82,13 @@ function LandingPage() {
                       <>
                         {joinRequest.some((request) => request.project_id === post.project_id) ? (
                           <div id="button-container">
-                          <button
-                            className="req-button"
-                            onClick={() => handleJoinCancel(post.project_id)}
-                          >
-                            Cancel Request
-                          </button>
+                            <button
+                              className="canc-req-button"
+                              id="canc-req-button"
+                              onClick={() => handleJoinCancel(post.project_id)}
+                            >
+                              Cancel Request
+                            </button>
                           </div>
                         ) : (
                           <button
