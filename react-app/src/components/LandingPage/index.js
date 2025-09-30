@@ -4,6 +4,8 @@ import * as projectStore from "../../store/projects";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
 import ProjectBar from "../ProjectBar";
+import ClipLoader from "react-spinners/ClipLoader";
+
 function LandingPage() {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts?.posts || []);
@@ -19,18 +21,19 @@ function LandingPage() {
     dispatch(postStore.getPostsThunk());
     dispatch(projectStore.fetchProjects());
     dispatch(projectStore.fetchJoinRequests(user?.id));
+    localStorage.getItem("theme");
   }, [dispatch, user?.id]);
 
-  // const startCoolDown = () => {
-  //   const mybutton = document.getElementById("canc-req-button");
-  //   mybutton.disabled = true;
-  //   setTimeout(function () {
-  //     mybutton.disabled = false;
-  //   }, 3000);
-  // }
 
   if (!posts || posts.length === 0) {
-    return <div>Loading...</div>; // Display a loading state until spots are fetched
+    return (
+      // Display a loading state until spots are fetched
+      <div className="loading-spinner">
+        {ClipLoader ? (
+               <ClipLoader size={110}/>
+             ) : <span>Loading...</span>}
+      </div>
+    )
   }
   const handleJoinRequest = async (project_id) => {
     await dispatch(projectStore.requestToJoinProject(project_id));
@@ -69,6 +72,7 @@ function LandingPage() {
             </div>
           )}
           <h3 className="post-header">Posts</h3>
+          
           {PublishedArray?.length > 0 && (
             <>
               {PublishedArray.reverse().map((post, i) => (

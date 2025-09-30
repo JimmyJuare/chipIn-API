@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -10,46 +10,32 @@ import SearchBar from "../searchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import { faToggleOn } from "@fortawesome/free-solid-svg-icons";
-
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state.session.user);
-  const [theme, setTheme] = useState(true);
-  if(theme){
-    //light theme
-    document.body.style.backgroundColor = 'white';
-    let elements = document.getElementsByClassName('post-body');
-    let titles = document.getElementsByClassName('post-title');
-    document.getElementsByClassName('project-bar-header')[0].style.color = 'black';
-    for(let i=0; i<titles.length; i++){
-      titles[i].style.color = 'black';
-    }
-    for(let i=0; i<elements.length; i++){
-      elements[i].style.color = 'black';
-    }
-  }else{
-    //dark theme
-    document.body.style.backgroundColor = '#121212';
-    document.body.style.color = 'white';
-
-    let elements = document.getElementsByClassName('post-body');
-    let titles = document.getElementsByClassName('post-title');
-
-    document.getElementsByClassName('project-bar-header')[0].style.color = 'white';
-    //title
-    for(let i=0; i<titles.length; i++){
-      titles[i].style.color = 'white';
-    }
-    //post body
-    for(let i=0; i<elements.length; i++){
-      elements[i].style.color = 'black';
-    }
+  const [theme, setTheme] = useState( () =>{ 
+     return localStorage.getItem("theme") || "light"; //default to light theme
   }
+);
+
+  useEffect(() => {
+      let isMounted = true;
+      
+      if (!isMounted) return;
+      document.body.classList.remove("light", "dark");
+      document.body.classList.add(theme);
+      localStorage.setItem("theme", theme);
+
+    return () => { isMounted = false; };
+  }, [theme]);
   return (
     <ul className="navbar">
-      <li>
-        <NavLink exact to="/"> 
+      <li className="nav-left">
+      <FontAwesomeIcon className="burger-icon" icon={faBars} />
+        <NavLink exact to="/">
           <img
+            alt="logo"
             className="logo"
             src="https://chip-in.s3.us-east-2.amazonaws.com/logo1.png"
           />
@@ -58,19 +44,33 @@ function Navigation({ isLoaded }) {
       <ul>
         <SearchBar />
       </ul>
-      
+      <li>
+      {theme === 'light' ? (
+        console.log(`light theme`, theme === 'light'),
+        <>
+        
+          <div className="theme-toggle">
+            <span>{`${theme} Theme`}</span>
+            <FontAwesomeIcon className='light-theme-icon' icon={faToggleOff} size="2x" onClick={() => setTheme("dark")} />
+          </div>
+        </>
+      ) : (
+        console.log(`dark theme`, theme === 'dark'),
+        <>
+          <div className="theme-toggle-dark">
+            <span>Dark Theme</span>
+            <FontAwesomeIcon className='dark-theme-icon' icon={faToggleOn} size="2x" onClick={() => setTheme("light")} />
+          </div>
+        </>
+      )}
+      </li>
       {isLoaded && user && (
         <>
-        {theme ? (
-          <FontAwesomeIcon className='light-theme-icon' icon={faToggleOff} size="2x" onClick={()=> setTheme(false)}/>
-        ) : (
-          <>
-          <FontAwesomeIcon className='dark-theme-icon' icon={faToggleOn} size="2x" onClick={()=> setTheme(true)} />
-          </>
-        )}
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
+        
+
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
         </>
       )}
       {!user && (

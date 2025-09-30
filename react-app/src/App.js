@@ -14,9 +14,24 @@ import ManagePosts from "./components/ManagePosts";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  // useEffect(() => {
+  //   dispatch(authenticate()).then(() => setIsLoaded(true));
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+  let isMounted = true; // track if component is still mounted
+
+  dispatch(authenticate()).then(() => {
+    if (isMounted) {
+      setIsLoaded(true); // only update if still mounted
+    }
+  });
+
+  return () => {
+    isMounted = false; // cleanup
+  };
+}, [dispatch]);
+
 
   return (
     <>

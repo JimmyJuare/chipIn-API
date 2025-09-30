@@ -12,11 +12,18 @@ html, body {
   /* color: white; */
 }
 
-body {
+body.light {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
+}
+body.dark{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #1B1B1B;
 }
 .req-button{
   border-radius: 10px;
@@ -70,6 +77,14 @@ body {
   gap: 2rem;
   justify-content: center;
 }
+body.dark .post-content {
+  background-color: #303030;
+  color: white;
+}
+body.dark .title,
+body.dark .project-bar-header{
+  color: white;
+}
 
 .post-wrapper {
   width: 100%;
@@ -108,7 +123,6 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  border-radius: 1rem 1rem 0 0;
 }
 
 .single-post {
@@ -146,4 +160,10 @@ body {
 }
 #button-container{
   display: flex;
+}
+.loading-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
 }
