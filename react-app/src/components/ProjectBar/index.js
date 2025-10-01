@@ -5,13 +5,15 @@ import OpenModalButton from "../OpenModalButton";
 import { Link } from "react-router-dom/";
 import "./index.css";
 import ProjectForm from "../ProjectForm";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaMusic } from "react-icons/fa";
+import { FaCode } from "react-icons/fa";
 export default function ProjectBar() {
   const projects = useSelector((state) => state.projects.projects || []);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   let filteredProjects
-  if(user && projects){
+  if (user && projects) {
     filteredProjects = projects.filter(
       (project) => project.user_id === user.id
     );
@@ -23,32 +25,39 @@ export default function ProjectBar() {
   return (
     <>
       <div className="project-bar">
-        <OpenModalButton
+        <div className="inner-bar">
+
+          {/* <OpenModalButton
           className="modal-button"
           buttonText="create project"
           modalComponent={<ProjectForm />}
-        ></OpenModalButton>
-        <Link
-              to={`posts/current`}
+          ></OpenModalButton>
+          <Link
+          to={`posts/current`}
             >
               <button className="modal-button">manage posts</button>
-            </Link>
-            <h3 className="project-bar-header">My Projects</h3>
-        {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
-          filteredProjects.map((project) => (
-            <Link
-              to={`projects/${project.id}`}
-              key={project.id}
-              className="project"
-            >
-              <div>
-                <p className="project-name">{project.project_name}</p>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p className="no-projects">No Projects</p>
-        )}
+            </Link> */}
+          <h3 className="project-bar-header">My Projects</h3>
+          {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <Link
+                to={`projects/${project.id}`}
+                key={project.id}
+                className="project"
+              >
+                <div>
+                  <p className="project-name">
+                    {project.project_type === "Music" ? (<FaMusic className="project-icon"/>) : null}
+                    {project.project_type === "Software" ? (<FaCode className="project-icon" />) : null}
+                    {project.project_name}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="no-projects">No Projects</p>
+          )}
+        </div>
       </div>
     </>
   );

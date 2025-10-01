@@ -14,25 +14,11 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state.session.user);
-  const [theme, setTheme] = useState( () =>{ 
-     return localStorage.getItem("theme") || "light"; //default to light theme
-  }
-);
 
-  useEffect(() => {
-      let isMounted = true;
-      
-      if (!isMounted) return;
-      document.body.classList.remove("light", "dark");
-      document.body.classList.add(theme);
-      localStorage.setItem("theme", theme);
-
-    return () => { isMounted = false; };
-  }, [theme]);
   return (
     <ul className="navbar">
       <li className="nav-left">
-      <FontAwesomeIcon className="burger-icon" icon={faBars} />
+        <FontAwesomeIcon className="burger-icon" icon={faBars} />
         <NavLink exact to="/">
           <img
             alt="logo"
@@ -44,29 +30,9 @@ function Navigation({ isLoaded }) {
       <ul>
         <SearchBar />
       </ul>
-      <li>
-      {theme === 'light' ? (
-        console.log(`light theme`, theme === 'light'),
-        <>
-        
-          <div className="theme-toggle">
-            <span>{`${theme} Theme`}</span>
-            <FontAwesomeIcon className='light-theme-icon' icon={faToggleOff} size="2x" onClick={() => setTheme("dark")} />
-          </div>
-        </>
-      ) : (
-        console.log(`dark theme`, theme === 'dark'),
-        <>
-          <div className="theme-toggle-dark">
-            <span>Dark Theme</span>
-            <FontAwesomeIcon className='dark-theme-icon' icon={faToggleOn} size="2x" onClick={() => setTheme("light")} />
-          </div>
-        </>
-      )}
-      </li>
       {isLoaded && user && (
         <>
-        
+
 
           <li>
             <ProfileButton user={sessionUser} />
